@@ -1,0 +1,35 @@
+body{
+font-family:Arial;
+background:#f4f4f4;
+text-align:center;
+padding:50px;
+}
+
+.container{
+background:white;
+padding:30px;
+border-radius:15px;
+width:400px;
+margin:auto;
+box-shadow:0 0 10px gray;
+}
+
+input{
+padding:10px;
+width:80%;
+margin:10px;
+}
+
+button{
+padding:10px 20px;
+background:blue;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+#weather{
+margin-top:20px;
+font-size:18px;
+}
