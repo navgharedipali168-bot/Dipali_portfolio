@@ -3,186 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Dipali Rajiv Navghare - Personal Portfolio Website" />
-  <meta name="keywords" content="portfolio, web development, student, IT, Dipali" />
-  <meta name="author" content="Dipali Rajiv Navghare" />
-  <title>Dipali Portfolio</title>
-
+  <meta name="description" content="Dipali's Task 3 - JavaScript To-Do List App" />
+  <title>Task 3 | To-Do List App</title>
   <style>
     :root{
-      --bg: #f4f7ff;
-      --bg-2: #eef3ff;
-      --card: rgba(255,255,255,0.78);
-      --text: #0f172a;
-      --muted: #475569;
-      --primary: #4f46e5;
-      --primary-2: #7c3aed;
-      --accent: #06b6d4;
-      --border: rgba(15, 23, 42, 0.08);
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
-      --radius: 24px;
+      --bg1:#0f172a;
+      --bg2:#1e3a8a;
+      --bg3:#0ea5e9;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --soft:#f8fafc;
+      --primary:#2563eb;
+      --primary2:#7c3aed;
+      --success:#16a34a;
+      --danger:#ef4444;
+      --warning:#f59e0b;
+      --shadow:0 20px 60px rgba(15,23,42,.18);
+      --radius:24px;
     }
 
-    [data-theme="dark"]{
-      --bg: #07111f;
-      --bg-2: #0b1730;
-      --card: rgba(15, 23, 42, 0.82);
-      --text: #e5eefc;
-      --muted: #b5c3dd;
-      --primary: #8b5cf6;
-      --primary-2: #22c55e;
-      --accent: #38bdf8;
-      --border: rgba(255,255,255,0.10);
-      --shadow: 0 24px 60px rgba(0,0,0,0.35);
-    }
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(79,70,229,.18), transparent 25%),
-        radial-gradient(circle at top right, rgba(6,182,212,.16), transparent 25%),
-        linear-gradient(180deg, var(--bg), var(--bg-2));
-      color: var(--text);
-      line-height:1.6;
       min-height:100vh;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,.25), transparent 28%),
+        radial-gradient(circle at top right, rgba(124,58,237,.18), transparent 24%),
+        linear-gradient(135deg, #0f172a 0%, #111827 35%, #0f172a 100%);
+      padding:24px;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .container{
-      width:min(1120px, 92%);
-      margin:auto;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      backdrop-filter: blur(18px);
-      background: rgba(10, 15, 30, 0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .topbar-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:14px 0;
-      color:#fff;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:800;
-      letter-spacing:.2px;
-      font-size:1.05rem;
-    }
-
-    .logo{
-      width:42px;
-      height:42px;
-      border-radius:14px;
-      display:grid;
-      place-items:center;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color:white;
-      font-weight:800;
-      box-shadow: 0 10px 25px rgba(79,70,229,.35);
-    }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    nav a{
-      color:rgba(255,255,255,.92);
-      font-weight:700;
-      font-size:.95rem;
-      position:relative;
-      padding:6px 0;
-    }
-
-    nav a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:0;
-      width:0;
-      height:2px;
-      border-radius:99px;
-      background: linear-gradient(90deg, var(--accent), #fff);
-      transition: width .25s ease;
-    }
-
-    nav a:hover::after{
-      width:100%;
-    }
-
-    .actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .icon-btn{
-      border:none;
-      cursor:pointer;
-      width:44px;
-      height:44px;
-      border-radius:14px;
-      background: rgba(255,255,255,0.12);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      transition: transform .2s ease, background .2s ease;
-    }
-
-    .icon-btn:hover{
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.18);
+    .wrap{
+      width:min(1100px, 100%);
+      margin:0 auto;
     }
 
     .hero{
-      padding:62px 0 28px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:28px;
-      align-items:center;
-    }
-
-    .hero-card{
-      background: var(--card);
-      border:1px solid var(--border);
-      border-radius: 34px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .hero-left{
-      padding:36px;
-      position:relative;
+      color:#fff;
+      margin-bottom:18px;
+      padding:18px 4px 8px;
     }
 
     .badge{
@@ -191,682 +54,620 @@
       gap:8px;
       padding:10px 14px;
       border-radius:999px;
-      background: rgba(79,70,229,.12);
-      color: var(--primary);
-      font-weight:700;
-      font-size:.9rem;
-      border:1px solid rgba(79,70,229,.15);
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      font-size:.92rem;
+      margin-bottom:14px;
     }
 
     .hero h1{
-      font-size: clamp(2.3rem, 5vw, 4.7rem);
+      font-size:clamp(2rem, 4vw, 3.4rem);
       line-height:1.05;
-      margin:18px 0 14px;
       letter-spacing:-.03em;
-    }
-
-    .hero h1 span{
-      background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color: transparent;
+      margin-bottom:10px;
     }
 
     .hero p{
-      color: var(--muted);
-      max-width:62ch;
-      font-size:1.04rem;
-      margin-bottom:24px;
+      max-width:70ch;
+      color:rgba(255,255,255,.82);
+      font-size:1rem;
+      line-height:1.65;
     }
 
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:14px 20px;
-      border-radius:16px;
-      font-weight:800;
-      border:1px solid transparent;
-      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
-      cursor:pointer;
-      font-size:.98rem;
-    }
-
-    .btn:hover{
-      transform: translateY(-2px);
-    }
-
-    .btn-primary{
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      color:#fff;
-      box-shadow: 0 16px 32px rgba(79,70,229,.22);
-    }
-
-    .btn-secondary{
-      background: transparent;
-      color: var(--text);
-      border-color: var(--border);
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-right{
-      padding:24px;
+    .grid{
       display:grid;
-      gap:16px;
-      align-content:center;
-      min-height:100%;
+      grid-template-columns: 1.1fr .9fr;
+      gap:20px;
+      align-items:start;
     }
 
-    .profile{
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,.28), transparent 35%),
-        linear-gradient(160deg, rgba(79,70,229,.95), rgba(6,182,212,.85));
-      color:#fff;
-      border-radius: 30px;
-      padding:28px;
-      min-height: 100%;
-      position:relative;
+    .card{
+      background:rgba(255,255,255,.96);
+      border:1px solid rgba(255,255,255,.25);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
       overflow:hidden;
-      box-shadow: 0 20px 50px rgba(79,70,229,.22);
     }
 
-    .profile::before,
-    .profile::after{
-      content:"";
-      position:absolute;
-      border-radius:50%;
-      background: rgba(255,255,255,.12);
-      filter: blur(2px);
+    .panel{
+      padding:22px;
     }
 
-    .profile::before{
-      width:180px;
-      height:180px;
-      top:-50px;
-      right:-50px;
-    }
-
-    .profile::after{
-      width:140px;
-      height:140px;
-      bottom:-40px;
-      left:-30px;
-    }
-
-    .avatar{
-      width:96px;
-      height:96px;
-      border-radius:28px;
-      background: rgba(255,255,255,.16);
-      border:1px solid rgba(255,255,255,.24);
+    .stats{
       display:grid;
-      place-items:center;
-      font-size:2rem;
-      font-weight:900;
-      margin-bottom:18px;
-      backdrop-filter: blur(10px);
-    }
-
-    .profile h2{
-      font-size:1.6rem;
-      margin-bottom:6px;
-    }
-
-    .profile p{
-      color: rgba(255,255,255,.9);
-      max-width: 32ch;
-      margin-bottom:18px;
-    }
-
-    .mini-stats{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:12px;
-      margin-top:18px;
+      margin-bottom:18px;
     }
 
     .stat{
-      background: rgba(255,255,255,.12);
-      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, #f8fbff, #eef4ff);
+      border:1px solid var(--line);
       border-radius:18px;
       padding:14px;
-      backdrop-filter: blur(10px);
     }
 
     .stat strong{
       display:block;
-      font-size:1.2rem;
-      margin-bottom:2px;
+      font-size:1.35rem;
+      margin-bottom:3px;
     }
 
-    .section{
-      padding: 18px 0 4px;
+    .stat span{
+      color:var(--muted);
+      font-size:.92rem;
     }
 
-    .section-title{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
+    .progress-box{
+      background: linear-gradient(135deg, rgba(37,99,235,.08), rgba(124,58,237,.08));
+      border:1px solid rgba(37,99,235,.12);
+      border-radius:20px;
+      padding:16px;
       margin-bottom:18px;
     }
 
-    .section-title h2{
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      letter-spacing:-.02em;
-    }
-
-    .section-title p{
-      color: var(--muted);
-      max-width:70ch;
-    }
-
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:18px;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:18px;
-    }
-
-    .card{
-      background: var(--card);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:24px;
-      backdrop-filter: blur(10px);
-    }
-
-    .feature{
+    .progress-top{
       display:flex;
-      gap:14px;
-      align-items:flex-start;
-    }
-
-    .feature .mark{
-      width:48px;
-      height:48px;
-      border-radius:16px;
-      flex:0 0 48px;
-      display:grid;
-      place-items:center;
-      background: linear-gradient(135deg, rgba(79,70,229,.14), rgba(6,182,212,.14));
-      font-size:1.2rem;
-    }
-
-    .feature h3{
-      margin-bottom:6px;
-      font-size:1.08rem;
-    }
-
-    .feature p{
-      color: var(--muted);
-      font-size:.95rem;
-    }
-
-    .skills{
-      display:flex;
-      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
       gap:12px;
+      margin-bottom:10px;
     }
 
-    .pill{
-      padding:12px 16px;
+    .progress-top h2{
+      font-size:1.05rem;
+    }
+
+    .progress-top .percent{
+      font-weight:800;
+      color:var(--primary);
+    }
+
+    .bar{
+      width:100%;
+      height:12px;
+      background:#e5eefc;
       border-radius:999px;
-      background: linear-gradient(135deg, rgba(79,70,229,.10), rgba(6,182,212,.10));
-      border:1px solid var(--border);
-      font-weight:700;
-    }
-
-    .project{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      height:100%;
-    }
-
-    .project .thumb{
-      height:170px;
-      border-radius:20px;
-      background:
-        radial-gradient(circle at top left, rgba(255,255,255,.35), transparent 22%),
-        linear-gradient(135deg, rgba(79,70,229,.95), rgba(124,58,237,.88), rgba(6,182,212,.88));
-      position:relative;
       overflow:hidden;
     }
 
-    .project .thumb::before{
-      content:"";
-      position:absolute;
-      inset:18px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.25);
+    .bar > div{
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--primary), var(--primary2));
+      border-radius:inherit;
+      transition:width .35s ease;
     }
 
-    .project .thumb::after{
-      content:"";
-      position:absolute;
-      width:120px;
-      height:120px;
-      border-radius:50%;
-      background: rgba(255,255,255,.12);
-      right:-20px;
-      bottom:-30px;
-    }
-
-    .project h3{
-      font-size:1.15rem;
-    }
-
-    .project p{
-      color: var(--muted);
-      flex:1;
-    }
-
-    .project .tag{
-      display:inline-flex;
-      width:fit-content;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(79,70,229,.12);
-      color: var(--primary);
-      font-weight:700;
-      font-size:.85rem;
-    }
-
-    .timeline{
+    .controls{
       display:grid;
-      gap:14px;
+      gap:12px;
+      margin-bottom:18px;
     }
 
-    .timeline-item{
-      display:grid;
-      grid-template-columns: 84px 1fr;
-      gap:14px;
-      align-items:start;
-      background: var(--card);
-      border:1px solid var(--border);
-      border-radius: 20px;
-      padding:18px;
-      box-shadow: var(--shadow);
+    .input-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
     }
 
-    .timeline-year{
-      font-weight:900;
-      color: var(--primary);
+    .input-row input,
+    .input-row select{
+      flex:1 1 180px;
     }
 
-    .timeline-item h3{
-      margin-bottom:6px;
-    }
-
-    .timeline-item p{
-      color: var(--muted);
-    }
-
-    form{
-      display:grid;
-      gap:14px;
+    input, select, button, textarea{
+      font:inherit;
     }
 
     .field{
-      display:grid;
-      gap:8px;
-    }
-
-    label{
-      font-weight:700;
-    }
-
-    input,
-    textarea{
       width:100%;
       padding:14px 16px;
       border-radius:16px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      color: var(--text);
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
       outline:none;
-      font: inherit;
+      transition:.2s ease;
     }
 
-    [data-theme="dark"] input,
-    [data-theme="dark"] textarea{
-      background: rgba(255,255,255,0.05);
+    .field:focus{
+      border-color:rgba(37,99,235,.45);
+      box-shadow:0 0 0 4px rgba(37,99,235,.10);
     }
 
-    input:focus,
-    textarea:focus{
-      border-color: rgba(79,70,229,.45);
-      box-shadow: 0 0 0 4px rgba(79,70,229,.10);
-    }
-
-    textarea{
-      min-height:140px;
-      resize:vertical;
-    }
-
-    .contact-grid{
-      display:grid;
-      grid-template-columns: 1fr .9fr;
-      gap:18px;
-    }
-
-    .contact-info{
-      display:grid;
-      gap:14px;
-    }
-
-    .info-row{
+    .actions{
       display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{
+      background:linear-gradient(135deg, var(--primary), var(--primary2));
+      color:#fff;
+      box-shadow:0 14px 28px rgba(37,99,235,.22);
+    }
+    .btn-light{
+      background:#eef2ff;
+      color:#1e3a8a;
+      border:1px solid #dbeafe;
+    }
+    .btn-danger{
+      background:#fee2e2;
+      color:#991b1b;
+      border:1px solid #fecaca;
+    }
+
+    .list-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .filters{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      transition:.2s ease;
+    }
+    .chip.active{
+      background:linear-gradient(135deg, rgba(37,99,235,.12), rgba(124,58,237,.12));
+      color:var(--primary);
+      border-color:rgba(37,99,235,.2);
+    }
+
+    .todo-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .todo{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
       gap:12px;
       align-items:center;
       padding:16px;
       border-radius:18px;
-      background: rgba(255,255,255,.5);
-      border:1px solid var(--border);
+      background:var(--soft);
+      border:1px solid var(--line);
     }
 
-    .info-icon{
-      width:44px;
-      height:44px;
+    .check{
+      width:22px;
+      height:22px;
+      accent-color:var(--primary);
+      cursor:pointer;
+    }
+
+    .todo-title{
+      font-weight:800;
+      margin-bottom:4px;
+      line-height:1.3;
+      word-break:break-word;
+    }
+
+    .todo-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:.86rem;
+      color:var(--muted);
+    }
+
+    .tag{
+      padding:5px 10px;
+      border-radius:999px;
+      background:#e0f2fe;
+      color:#0369a1;
+      font-weight:700;
+    }
+    .tag.work{background:#ede9fe;color:#6d28d9}
+    .tag.home{background:#dcfce7;color:#166534}
+    .tag.study{background:#fee2e2;color:#b91c1c}
+    .tag.other{background:#fef3c7;color:#a16207}
+
+    .todo.done .todo-title{
+      text-decoration:line-through;
+      color:#94a3b8;
+      font-weight:700;
+    }
+    .todo.done{
+      opacity:.82;
+      background:#f8fafc;
+    }
+
+    .todo-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .icon-btn{
+      width:40px;
+      height:40px;
       border-radius:14px;
-      background: linear-gradient(135deg, rgba(79,70,229,.14), rgba(6,182,212,.14));
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
       display:grid;
       place-items:center;
+      transition:.2s ease;
+      font-size:1rem;
+    }
+    .icon-btn:hover{transform:translateY(-1px)}
+
+    .empty{
+      text-align:center;
+      padding:38px 18px;
+      border:1px dashed #cbd5e1;
+      border-radius:20px;
+      background:rgba(248,250,252,.8);
+      color:var(--muted);
+    }
+
+    .side{
+      display:grid;
+      gap:18px;
+    }
+
+    .side-card h3{
       font-size:1.1rem;
-      flex:0 0 44px;
+      margin-bottom:10px;
+    }
+
+    .tips{
+      display:grid;
+      gap:10px;
+      color:var(--muted);
+      line-height:1.6;
+    }
+
+    .tips li{
+      margin-left:18px;
+    }
+
+    .small{
+      font-size:.92rem;
+      color:var(--muted);
     }
 
     footer{
-      padding: 26px 0 42px;
-      color: var(--muted);
       text-align:center;
+      color:rgba(255,255,255,.72);
+      padding:18px 0 4px;
+      font-size:.92rem;
     }
 
-    .fade-in{
-      animation: fadeUp .7s ease both;
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
     }
 
-    @keyframes fadeUp{
-      from{
-        opacity:0;
-        transform: translateY(18px);
+    @media (max-width: 640px){
+      body{padding:16px}
+      .panel{padding:16px}
+      .stats{grid-template-columns:1fr}
+      .todo{
+        grid-template-columns:auto 1fr;
       }
-      to{
-        opacity:1;
-        transform: translateY(0);
+      .todo-actions{
+        grid-column:1 / -1;
+        justify-content:flex-start;
       }
-    }
-
-    @media (max-width: 960px){
-      .hero-grid,
-      .contact-grid,
-      .grid-3,
-      .grid-2{
-        grid-template-columns:1fr;
-      }
-
-      nav{
-        display:none;
-      }
-
-      .hero{
-        padding-top:34px;
-      }
-    }
-
-    @media (max-width: 560px){
-      .hero-left,
-      .card{
-        padding:20px;
-      }
-
-      .topbar-inner{
-        gap:10px;
-      }
-
-      .brand span{
-        font-size:.98rem;
-      }
-
-      .mini-stats{
-        grid-template-columns:1fr;
-      }
-
-      .btn{
-        width:100%;
-      }
-
-      .cta-row{
-        display:grid;
-      }
-
-      .timeline-item{
-        grid-template-columns:1fr;
-      }
+      .input-row input, .input-row select{flex:1 1 100%}
+      .actions .btn{flex:1 1 100%}
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <div class="logo">D</div>
-        <span>Dipali Portfolio</span>
-      </div>
+  <div class="wrap">
+    <section class="hero">
+      <div class="badge">✅ Task 3 | JavaScript Logic & State Management</div>
+      <h1>Smart To-Do List App</h1>
+      <p>
+        Add tasks, mark them complete, filter by category, search quickly, and save everything in your browser using
+        <strong>localStorage</strong>. This project is made for internship submission and is fully responsive.
+      </p>
+    </section>
 
-      <nav aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <div class="grid">
+      <section class="card panel">
+        <div class="stats" aria-label="Task statistics">
+          <div class="stat">
+            <strong id="totalCount">0</strong>
+            <span>Total Tasks</span>
+          </div>
+          <div class="stat">
+            <strong id="activeCount">0</strong>
+            <span>Active Tasks</span>
+          </div>
+          <div class="stat">
+            <strong id="doneCount">0</strong>
+            <span>Completed</span>
+          </div>
+        </div>
 
-      <div class="actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">☾</button>
-      </div>
-    </div>
-  </header>
+        <div class="progress-box">
+          <div class="progress-top">
+            <h2>Progress</h2>
+            <div class="percent" id="progressText">0%</div>
+          </div>
+          <div class="bar" aria-label="Progress bar">
+            <div id="progressBar"></div>
+          </div>
+        </div>
 
-  <main>
-    <section class="hero container" id="home">
-      <div class="hero-grid">
-        <div class="hero-card hero-left fade-in">
-          <span class="badge">✨ 2nd Year IT Student | Web Developer</span>
-          <h1>Hi, I am <span>Dipali Rajiv Navghare</span></h1>
-          <p>
-            I build clean, responsive, and user-friendly websites using HTML, CSS, and JavaScript.
-            This portfolio is designed for my internship task submission and shows my learning journey.
+        <div class="controls">
+          <div class="input-row">
+            <input id="taskInput" class="field" type="text" placeholder="Type a new task and press Enter" aria-label="Task title">
+            <select id="categoryInput" class="field" aria-label="Task category">
+              <option value="work">Work</option>
+              <option value="study">Study</option>
+              <option value="home">Home</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="input-row">
+            <input id="searchInput" class="field" type="search" placeholder="Search tasks..." aria-label="Search tasks">
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" id="addBtn">➕ Add Task</button>
+            <button class="btn btn-light" id="clearCompletedBtn">✔ Clear Completed</button>
+            <button class="btn btn-danger" id="clearAllBtn">🗑 Clear All</button>
+          </div>
+        </div>
+
+        <div class="list-head">
+          <h2 style="font-size:1.1rem;">Your Tasks</h2>
+          <div class="filters" role="tablist" aria-label="Task filters">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="active">Active</button>
+            <button class="chip" data-filter="completed">Completed</button>
+          </div>
+        </div>
+
+        <div id="todoList" class="todo-list" aria-live="polite"></div>
+        <div id="emptyState" class="empty" style="display:none;">
+          No tasks found. Add your first task above.
+        </div>
+      </section>
+
+      <aside class="side">
+        <section class="card panel side-card">
+          <h3>How it works</h3>
+          <ul class="tips">
+            <li>Type a task and press <strong>Enter</strong> or click <strong>Add Task</strong>.</li>
+            <li>Use the circle to mark tasks complete.</li>
+            <li>Search and filter tasks using the controls.</li>
+            <li>Your tasks stay saved even after refresh.</li>
+          </ul>
+        </section>
+
+        <section class="card panel side-card">
+          <h3>What this task shows</h3>
+          <div class="tips">
+            <p><strong>DOM manipulation</strong> – adding/removing items dynamically.</p>
+            <p><strong>Event handling</strong> – buttons, keyboard, checkbox actions.</p>
+            <p><strong>State management</strong> – live updates with localStorage.</p>
+            <p><strong>Responsive UI</strong> – works on mobile and desktop.</p>
+          </div>
+        </section>
+
+        <section class="card panel side-card">
+          <h3>Submission tip</h3>
+          <p class="small">
+            Save this file as <strong>index.html</strong>, upload it to your GitHub repository, and submit the same link in the portal for Task 3.
           </p>
+        </section>
+      </aside>
+    </div>
 
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#projects">View Projects</a>
-            <a class="btn btn-secondary" href="#contact">Contact Me</a>
-          </div>
-        </div>
+    <footer>Dipali Portfolio • Task 3 Project</footer>
+  </div>
 
-        <aside class="profile fade-in">
-          <div class="avatar">DN</div>
-          <h2>Web Development Learner</h2>
-          <p>Focused on responsive design, semantic HTML, and modern UI structure.</p>
+  <script>
+    const taskInput = document.getElementById("taskInput");
+    const categoryInput = document.getElementById("categoryInput");
+    const searchInput = document.getElementById("searchInput");
+    const addBtn = document.getElementById("addBtn");
+    const clearCompletedBtn = document.getElementById("clearCompletedBtn");
+    const clearAllBtn = document.getElementById("clearAllBtn");
+    const todoList = document.getElementById("todoList");
+    const emptyState = document.getElementById("emptyState");
 
-          <div class="mini-stats">
-            <div class="stat">
-              <strong>3+</strong>
-              Projects
-            </div>
-            <div class="stat">
-              <strong>4</strong>
-              Core Skills
-            </div>
-            <div class="stat">
-              <strong>100%</strong>
-              Responsive
-            </div>
-            <div class="stat">
-              <strong>Task 2</strong>
-              Submission
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
+    const totalCount = document.getElementById("totalCount");
+    const activeCount = document.getElementById("activeCount");
+    const doneCount = document.getElementById("doneCount");
+    const progressText = document.getElementById("progressText");
+    const progressBar = document.getElementById("progressBar");
 
-    <section class="section container" id="about">
-      <div class="section-title">
-        <h2>About Me</h2>
-        <p>I am an Information Technology student who enjoys making websites that are simple, attractive, and easy to use.</p>
-      </div>
+    const filterButtons = document.querySelectorAll(".chip");
 
-      <div class="grid-3">
-        <article class="card feature">
-          <div class="mark">🎯</div>
+    let tasks = JSON.parse(localStorage.getItem("tasks_v3")) || [
+      { id: Date.now() - 3, text: "Complete Task 3 To-Do List", category: "study", done: false },
+      { id: Date.now() - 2, text: "Upload project to GitHub", category: "work", done: false },
+      { id: Date.now() - 1, text: "Submit the portal link", category: "other", done: false }
+    ];
+
+    let currentFilter = "all";
+
+    function saveTasks() {
+      localStorage.setItem("tasks_v3", JSON.stringify(tasks));
+    }
+
+    function escapeText(str) {
+      return str.replace(/[&<>"']/g, (m) => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#39;"
+      })[m]);
+    }
+
+    function addTask() {
+      const text = taskInput.value.trim();
+      const category = categoryInput.value;
+
+      if (!text) {
+        taskInput.focus();
+        return;
+      }
+
+      tasks.unshift({
+        id: Date.now(),
+        text,
+        category,
+        done: false
+      });
+
+      taskInput.value = "";
+      saveTasks();
+      renderTasks();
+      taskInput.focus();
+    }
+
+    function toggleTask(id) {
+      tasks = tasks.map(task => task.id === id ? { ...task, done: !task.done } : task);
+      saveTasks();
+      renderTasks();
+    }
+
+    function deleteTask(id) {
+      tasks = tasks.filter(task => task.id !== id);
+      saveTasks();
+      renderTasks();
+    }
+
+    function clearCompleted() {
+      tasks = tasks.filter(task => !task.done);
+      saveTasks();
+      renderTasks();
+    }
+
+    function clearAll() {
+      if (tasks.length === 0) return;
+      tasks = [];
+      saveTasks();
+      renderTasks();
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      filterButtons.forEach(btn => btn.classList.toggle("active", btn.dataset.filter === filter));
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const q = searchInput.value.trim().toLowerCase();
+
+      let visible = tasks.filter(task => {
+        const matchesSearch = task.text.toLowerCase().includes(q);
+        const matchesFilter =
+          currentFilter === "all" ||
+          (currentFilter === "active" && !task.done) ||
+          (currentFilter === "completed" && task.done);
+        return matchesSearch && matchesFilter;
+      });
+
+      todoList.innerHTML = visible.map(task => `
+        <article class="todo ${task.done ? "done" : ""}">
+          <input class="check" type="checkbox" ${task.done ? "checked" : ""} aria-label="Mark task complete" onchange="window.__toggleTask(${task.id})">
           <div>
-            <h3>My Goal</h3>
-            <p>To learn modern web development and build useful projects for internships and placements.</p>
+            <div class="todo-title">${escapeText(task.text)}</div>
+            <div class="todo-meta">
+              <span class="tag ${task.category}">${task.category.toUpperCase()}</span>
+              <span>${task.done ? "Completed" : "In progress"}</span>
+            </div>
+          </div>
+          <div class="todo-actions">
+            <button class="icon-btn" title="Delete task" aria-label="Delete task" onclick="window.__deleteTask(${task.id})">🗑</button>
           </div>
         </article>
+      `).join("");
 
-        <article class="card feature">
-          <div class="mark">💡</div>
-          <div>
-            <h3>My Strength</h3>
-            <p>Turning basic ideas into neat and professional-looking web pages with proper structure.</p>
-          </div>
-        </article>
+      emptyState.style.display = visible.length ? "none" : "block";
 
-        <article class="card feature">
-          <div class="mark">🚀</div>
-          <div>
-            <h3>My Focus</h3>
-            <p>Responsive layouts, accessible UI, and practical project-based learning.</p>
-          </div>
-        </article>
-      </div>
-    </section>
+      const total = tasks.length;
+      const done = tasks.filter(t => t.done).length;
+      const active = total - done;
+      const percent = total ? Math.round((done / total) * 100) : 0;
 
-    <section class="section container" id="skills">
-      <div class="section-title">
-        <h2>Skills</h2>
-        <p>These are the technologies I have started learning and using in projects.</p>
-      </div>
+      totalCount.textContent = total;
+      activeCount.textContent = active;
+      doneCount.textContent = done;
+      progressText.textContent = `${percent}%`;
+      progressBar.style.width = `${percent}%`;
+    }
 
-      <div class="card">
-        <div class="skills">
-          <span class="pill">HTML5</span>
-          <span class="pill">CSS3</span>
-          <span class="pill">JavaScript</span>
-          <span class="pill">Responsive Design</span>
-          <span class="pill">Semantic HTML</span>
-          <span class="pill">GitHub Basics</span>
-          <span class="pill">Problem Solving</span>
-          <span class="pill">Team Work</span>
-        </div>
-      </div>
-    </section>
+    window.__toggleTask = toggleTask;
+    window.__deleteTask = deleteTask;
 
-    <section class="section container" id="projects">
-      <div class="section-title">
-        <h2>Projects</h2>
-        <p>Some sample projects that show my practice in web development.</p>
-      </div>
+    addBtn.addEventListener("click", addTask);
+    clearCompletedBtn.addEventListener("click", clearCompleted);
+    clearAllBtn.addEventListener("click", clearAll);
 
-      <div class="grid-3">
-        <article class="card project">
-          <div class="thumb"></div>
-          <span class="tag">Featured Project</span>
-          <h3>Portfolio Website</h3>
-          <p>A modern personal portfolio website built with semantic HTML and responsive CSS layout.</p>
-        </article>
+    taskInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") addTask();
+    });
 
-        <article class="card project">
-          <div class="thumb"></div>
-          <span class="tag">JavaScript Project</span>
-          <h3>To-Do List App</h3>
-          <p>A simple task manager for adding, editing, and tracking daily tasks using JavaScript.</p>
-        </article>
+    searchInput.addEventListener("input", renderTasks);
 
-        <article class="card project">
-          <div class="thumb"></div>
-          <span class="tag">College Project</span>
-          <h3>Marathon Alert Website</h3>
-          <p>A website idea for event updates, registration, and location-based information.</p>
-        </article>
-      </div>
-    </section>
+    filterButtons.forEach(btn => {
+      btn.addEventListener("click", () => setFilter(btn.dataset.filter));
+    });
 
-    <section class="section container" id="timeline">
-      <div class="section-title">
-        <h2>Learning Journey</h2>
-        <p>My current learning path in web development.</p>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-year">Step 1</div>
-          <div>
-            <h3>HTML Structure</h3>
-            <p>Creating page layouts using semantic tags like header, nav, main, section, and footer.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-year">Step 2</div>
-          <div>
-            <h3>CSS Styling</h3>
-            <p>Using colors, spacing, grid, flexbox, and responsive breakpoints to make the page beautiful.</p>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-year">Step 3</div>
-          <div>
-            <h3>JavaScript</h3>
-            <p>Adding interactivity like theme toggle, form handling, and future dynamic features.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section container" id="contact">
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>You can use this section to connect with me.</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="card">
-          <form>
-            <div class="field">
-              <label for="name">Full Name</label>
-              <input id="name" type="text" placeholder="Enter your name" />
-            </div>
-
-            <div class="field">
-              <label for="email">Email Address</label>
-              <input id="email" type="email" placeholder="Enter your email" />
-            </div>
-
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea id="message" placeholder="Write your message here"></textarea>
-            </div>
-
-            <button class="btn btn-primary" type="submit">Send Message</button>
-          </form>
-        </div>
-
-        <div cl
+    renderTasks();
+  </script>
+</body>
+</html>
